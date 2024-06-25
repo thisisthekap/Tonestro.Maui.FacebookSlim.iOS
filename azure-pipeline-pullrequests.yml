@@ -1,0 +1,49 @@
+pr:
+  - main
+
+pool:
+  vmImage: 'macOS-13'
+
+steps:
+
+- bash: |
+    sudo xcodes select
+  displayName: select solution xcode version
+
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    useGlobalJson: true
+
+- bash: |
+    echo "##vso[build.updatebuildnumber]pullrequests-tonestro-maui-facebookslim-ios-$(Build.SourceBranchName)-$(Build.BuildId)"
+  displayName: Set Build Number
+
+- bash: |
+    sudo dotnet workload restore
+  displayName: Restore workloads
+
+- bash: |
+    cd Tonestro.Maui.FacebookSlim.iOS
+    dotnet build -c Release
+    dotnet pack -c Release
+  displayName: "Tonestro.Maui.FacebookSlim.iOS: Build Release Nuget"
+
+- bash: |
+    cd local-nugets
+    cp ../Tonestro.Maui.FacebookSlim.iOS/nugetoutput/Tonestro.Maui.FacebookSlim.iOS.*.nupkg .
+    cd ..
+  displayName: copy nugets to local-nugets
+
+- bash: |
+    cd Tonestro.Maui.FacebookSlim.iOS.UsageChecker
+    dotnet build
+  displayName: Build UsageChecker
+
+- task: PublishBuildArtifacts@1
+  displayName: publish nugetoutput
+  inputs:
+    PathtoPublish: 'Tonestro.Maui.FacebookSlim.iOS/nugetoutput'
+    ArtifactName: 'nugetoutput'
+    publishLocation: 'Container'
+    StoreAsTar: true

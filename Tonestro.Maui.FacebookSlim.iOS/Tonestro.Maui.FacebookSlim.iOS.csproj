@@ -1,13 +1,37 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net8.0-ios</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>true</ImplicitUsings>
-    <IsBindingProject>true</IsBindingProject>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0-ios</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>true</ImplicitUsings>
+        <IsBindingProject>true</IsBindingProject>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
-    <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
-  </ItemGroup>
+    <PropertyGroup>
+        <IsPackable>true</IsPackable>
+        <PackageId>Tonestro.Maui.FacebookSlim.iOS</PackageId>
+        <Version>15.1.0.1</Version>
+        <Description>Contains bindings for https://github.com/facebook/facebook-ios-sdk</Description>
+        <Authors>Christian Kapplmüller</Authors>
+        <Company>fun.music IT GmbH</Company>
+        <PackageOutputPath>nugetoutput</PackageOutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ObjcBindingApiDefinition Include="ApiDefinition.cs"/>
+        <ObjcBindingCoreSource Include="StructsAndEnums.cs"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CommunityToolkit.Maui.NativeLibraryInterop.BuildTasks" Version="0.0.1-pre1">
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+    </ItemGroup>
+    
+    <ItemGroup>
+        <NLIXCodeProjectReference Include="../native/MauiFacebook.xcodeproj">
+            <SchemeName>MauiFacebook</SchemeName>
+            <SharpieBind>false</SharpieBind>
+        </NLIXCodeProjectReference>
+    </ItemGroup>
+    
 </Project>

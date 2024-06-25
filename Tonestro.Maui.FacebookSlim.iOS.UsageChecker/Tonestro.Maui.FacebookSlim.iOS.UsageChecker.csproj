@@ -6,4 +6,7 @@
     <ImplicitUsings>true</ImplicitUsings>
     <SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Tonestro.Maui.FacebookSlim.iOS" Version="15.1.0.1" />
+  </ItemGroup>
 </Project>

@@ -1,69 +1,115 @@
-namespace Tonestro.Maui.FacebookSlim.iOS {
+using System;
+using Foundation;
+using ObjCRuntime;
+using UIKit;
 
-	// The first step to creating a binding is to add your native framework ("MyLibrary.xcframework")
-	// to the project.
-	// Open your binding csproj and add a section like this
-	// <ItemGroup>
-	//   <NativeReference Include="MyLibrary.xcframework">
-	//     <Kind>Framework</Kind>
-	//     <Frameworks></Frameworks>
-	//   </NativeReference>
-	// </ItemGroup>
-	//
-	// Once you've added it, you will need to customize it for your specific library:
-	//  - Change the Include to the correct path/name of your library
-	//  - Change Kind to Static (.a) or Framework (.framework/.xcframework) based upon the library kind and extension.
-	//    - Dynamic (.dylib) is a third option but rarely if ever valid, and only on macOS and Mac Catalyst
-	//  - If your library depends on other frameworks, add them inside <Frameworks></Frameworks>
-	// Example:
-	// <NativeReference Include="libs\MyTestFramework.xcframework">
-	//   <Kind>Framework</Kind>
-	//   <Frameworks>CoreLocation ModelIO</Frameworks>
-	// </NativeReference>
-	// 
-	// Once you've done that, you're ready to move on to binding the API...
-	//
-	// Here is where you'd define your API definition for the native Objective-C library.
-	//
-	// For example, to bind the following Objective-C class:
-	//
-	//     @interface Widget : NSObject {
-	//     }
-	//
-	// The C# binding would look like this:
-	//
-	//     [BaseType (typeof (NSObject))]
-	//     interface Widget {
-	//     }
-	//
-	// To bind Objective-C properties, such as:
-	//
-	//     @property (nonatomic, readwrite, assign) CGPoint center;
-	//
-	// You would add a property definition in the C# interface like so:
-	//
-	//     [Export ("center")]
-	//     CGPoint Center { get; set; }
-	//
-	// To bind an Objective-C method, such as:
-	//
-	//     -(void) doSomething:(NSObject *)object atIndex:(NSInteger)index;
-	//
-	// You would add a method definition to the C# interface like so:
-	//
-	//     [Export ("doSomething:atIndex:")]
-	//     void DoSomething (NSObject object, nint index);
-	//
-	// Objective-C "constructors" such as:
-	//
-	//     -(id)initWithElmo:(ElmoMuppet *)elmo;
-	//
-	// Can be bound as:
-	//
-	//     [Export ("initWithElmo:")]
-	//     NativeHandle Constructor (ElmoMuppet elmo);
-	//
-	// For more information, see https://aka.ms/ios-binding
-	//
+namespace Tonestro.Maui.FacebookSlim.iOS;
 
+[Static]
+partial interface Constants
+{
+	// extern double MauiFacebookVersionNumber;
+	[Field ("MauiFacebookVersionNumber", "__Internal")]
+	double MauiFacebookVersionNumber { get; }
+
+	// extern const unsigned char[] MauiFacebookVersionString;
+	[Field ("MauiFacebookVersionString", "__Internal")]
+	NSString MauiFacebookVersionString { get; }
+}
+
+// @interface CoreKitManagerSlim : NSObject
+[BaseType (typeof(NSObject))]
+interface CoreKitManagerSlim
+{
+	// @property (readonly, nonatomic, strong, class) CoreKitManagerSlim * _Nonnull shared;
+	[Static]
+	[Export ("shared", ArgumentSemantic.Strong)]
+	CoreKitManagerSlim Shared { get; }
+
+	// -(void)enableLoggingBehaviorWithApploggingBehavior:(enum LoggingBehaviorEnum)apploggingBehavior;
+	[Export ("enableLoggingBehaviorWithApploggingBehavior:")]
+	void EnableLoggingBehavior (LoggingBehaviorEnum apploggingBehavior);
+
+	// @property (nonatomic) BOOL isAdvertiserTrackingEnabled;
+	[Export ("isAdvertiserTrackingEnabled")]
+	bool IsAdvertiserTrackingEnabled { get; set; }
+
+	// @property (nonatomic) BOOL isAdvertiserIdCollectionEnabled;
+	[Export ("isAdvertiserIdCollectionEnabled")]
+	bool IsAdvertiserIdCollectionEnabled { get; set; }
+
+	// -(void)logEventWithAppEventName:(enum AppEventNameEnum)appEventName appparameters:(NSDictionary * _Nonnull)appparameters;
+	[Export ("logEventWithAppEventName:appparameters:")]
+	void LogEvent (AppEventNameEnum appEventName, NSDictionary appparameters);
+
+	// @property (copy, nonatomic) NSString * _Nullable userId;
+	[NullAllowed, Export ("userId")]
+	string UserId { get; set; }
+
+	// -(void)setUserWithUserEmail:(NSString * _Nullable)userEmail firstName:(NSString * _Nullable)firstName lastName:(NSString * _Nullable)lastName phone:(NSString * _Nullable)phone dateOfBirth:(NSString * _Nullable)dateOfBirth gender:(NSString * _Nullable)gender city:(NSString * _Nullable)city state:(NSString * _Nullable)state zip:(NSString * _Nullable)zip country:(NSString * _Nullable)country;
+	[Export ("setUserWithUserEmail:firstName:lastName:phone:dateOfBirth:gender:city:state:zip:country:")]
+	void SetUser ([NullAllowed] string userEmail, [NullAllowed] string firstName, [NullAllowed] string lastName, [NullAllowed] string phone, [NullAllowed] string dateOfBirth, [NullAllowed] string gender, [NullAllowed] string city, [NullAllowed] string state, [NullAllowed] string zip, [NullAllowed] string country);
+
+	// -(NSString * _Nonnull)anonymousId __attribute__((warn_unused_result("")));
+	[Export ("anonymousId")]
+	string AnonymousId { get; }
+
+	// -(void)activateApp;
+	[Export ("activateApp")]
+	void ActivateApp ();
+
+	// -(void)logEventCustomWithAppEventName:(NSString * _Nonnull)appEventName appparameters:(NSDictionary * _Nonnull)appparameters;
+	[Export ("logEventCustomWithAppEventName:appparameters:")]
+	void LogEvent (string appEventName, NSDictionary appparameters);
+
+	// -(void)initializeSdk;
+	[Export ("initializeSdk")]
+	void InitializeSdk ();
+
+	// -(BOOL)finishedLaunchingWithApp:(UIApplication * _Nonnull)app options:(NSDictionary<UIApplicationLaunchOptionsKey,id> * _Nonnull)options __attribute__((warn_unused_result("")));
+	[Export ("finishedLaunchingWithApp:options:")]
+	bool FinishedLaunching (UIApplication app, NSDictionary<NSString, NSObject> options);
+
+	// -(BOOL)openUrlWithApp:(UIApplication * _Nonnull)app url:(NSURL * _Nonnull)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> * _Nonnull)options __attribute__((warn_unused_result("")));
+	[Export ("openUrlWithApp:url:options:")]
+	bool OpenUrl (UIApplication app, NSUrl url, NSDictionary<NSString, NSObject> options);
+}
+
+// @interface LoginManagerSlim : NSObject
+[BaseType (typeof(NSObject))]
+interface LoginManagerSlim
+{
+	// @property (readonly, nonatomic, strong, class) LoginManagerSlim * _Nonnull shared;
+	[Static]
+	[Export ("shared", ArgumentSemantic.Strong)]
+	LoginManagerSlim Shared { get; }
+
+	// -(void)loginWithPermissions:(NSArray<NSString *> * _Nonnull)permissions viewController:(UIViewController * _Nonnull)viewController onCompleted:(void (^ _Nonnull)(enum LoginResultEnum, LoginResult * _Nullable, NSError * _Nullable))onCompleted;
+	[Export ("loginWithPermissions:viewController:onCompleted:")]
+	void Login (string[] permissions, UIViewController viewController, Action<LoginResultEnum, LoginResult, NSError> onCompleted);
+
+	// -(void)logout;
+	[Export ("logout")]
+	void Logout ();
+}
+
+// @interface LoginResult : NSObject
+[BaseType (typeof(NSObject), Name = "_TtC12MauiFacebook11LoginResult")]
+interface LoginResult
+{
+	// @property (copy, nonatomic) NSString * _Nonnull token;
+	[Export ("token")]
+	string Token { get; set; }
+
+	// @property (copy, nonatomic) NSString * _Nonnull authenticationToken;
+	[Export ("authenticationToken")]
+	string AuthenticationToken { get; set; }
+
+	// @property (copy, nonatomic) NSSet<NSString *> * _Nonnull grantedPermissions;
+	[Export ("grantedPermissions", ArgumentSemantic.Copy)]
+	NSSet<NSString> GrantedPermissions { get; set; }
+
+	// @property (copy, nonatomic) NSSet<NSString *> * _Nonnull declinedPermissions;
+	[Export ("declinedPermissions", ArgumentSemantic.Copy)]
+	NSSet<NSString> DeclinedPermissions { get; set; }
 }
