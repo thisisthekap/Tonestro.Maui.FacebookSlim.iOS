@@ -9,9 +9,9 @@
     <PropertyGroup>
         <IsPackable>true</IsPackable>
         <PackageId>Tonestro.Maui.FacebookSlim.iOS</PackageId>
-        <Version>15.1.0.2</Version>
+        <Version>17.1.0.1</Version>
         <Description>Contains bindings for https://github.com/facebook/facebook-ios-sdk</Description>
-        <Authors>Christian Kapplmüller</Authors>
+        <Authors>Christian Kapplmüller, Albilaga Linggra Pradana</Authors>
         <Company>fun.music IT GmbH</Company>
         <PackageOutputPath>nugetoutput</PackageOutputPath>
     </PropertyGroup>
