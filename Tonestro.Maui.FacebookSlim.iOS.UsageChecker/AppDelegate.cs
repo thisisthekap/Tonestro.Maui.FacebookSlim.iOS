@@ -17,7 +17,6 @@ public class AppDelegate : UIApplicationDelegate
         CoreKitManagerSlim.Shared.EnableLoggingBehavior(LoggingBehaviorEnum.NetworkRequests);
         CoreKitManagerSlim.Shared.EnableLoggingBehavior(LoggingBehaviorEnum.DeveloperErrors);
         CoreKitManagerSlim.Shared.IsAdvertiserTrackingEnabled = true;
-
         CoreKitManagerSlim.Shared.IsAdvertiserIdCollectionEnabled = true;
         CoreKitManagerSlim.Shared.FinishedLaunching(application, ConvertToGenericNSDictionary(launchOptions));
 
