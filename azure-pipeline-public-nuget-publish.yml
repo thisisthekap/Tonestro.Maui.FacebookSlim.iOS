@@ -6,7 +6,7 @@ trigger:
 pr: none
 
 pool:
-  vmImage: 'macOS-13'
+  vmImage: 'macOS-14'
 
 variables:
   - group: nuget.org
@@ -37,6 +37,11 @@ steps:
 - bash: |
     sudo dotnet workload restore
   displayName: Restore workloads
+
+- bash: |
+    cd Mobile/Sepp.Mobile.iOS
+    sudo dotnet workload install ios --from-rollback-file rollback.json
+  displayName: Workaround for broken ios workload
 
 - bash: |
     cd Tonestro.Maui.FacebookSlim.iOS

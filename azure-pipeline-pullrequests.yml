@@ -2,7 +2,7 @@ pr:
   - main
 
 pool:
-  vmImage: 'macOS-13'
+  vmImage: 'macOS-14'
 
 steps:
 
@@ -22,6 +22,11 @@ steps:
 - bash: |
     sudo dotnet workload restore
   displayName: Restore workloads
+
+- bash: |
+    cd Mobile/Sepp.Mobile.iOS
+    sudo dotnet workload install ios --from-rollback-file rollback.json
+  displayName: Workaround for broken ios workload
 
 - bash: |
     cd Tonestro.Maui.FacebookSlim.iOS
