@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5006FF442CCFAABC00C2671D /* FacebookAEM in Frameworks */ = {isa = PBXBuildFile; productRef = 5006FF432CCFAABC00C2671D /* FacebookAEM */; };
-		5006FF462CCFAABF00C2671D /* FacebookGamingServices in Frameworks */ = {isa = PBXBuildFile; productRef = 5006FF452CCFAABF00C2671D /* FacebookGamingServices */; };
 		643C24B32B99104200C2A6AA /* MauiFacebook.h in Headers */ = {isa = PBXBuildFile; fileRef = 643C24B22B99104200C2A6AA /* MauiFacebook.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0AF2A9B2BDC4E5B002AA03E /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = D0AF2A9A2BDC4E5B002AA03E /* FacebookBasics */; };
 		D0AF2A9D2BDC4E5B002AA03E /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = D0AF2A9C2BDC4E5B002AA03E /* FacebookCore */; };
@@ -44,7 +43,6 @@
 				DB641C312C2AD4D70034C954 /* FacebookLogin in Frameworks */,
 				5006FF442CCFAABC00C2671D /* FacebookAEM in Frameworks */,
 				D0AF2A9B2BDC4E5B002AA03E /* FacebookBasics in Frameworks */,
-				5006FF462CCFAABF00C2671D /* FacebookGamingServices in Frameworks */,
 				DB641C332C2AD4DE0034C954 /* FacebookShare in Frameworks */,
 				D0AF2A9D2BDC4E5B002AA03E /* FacebookCore in Frameworks */,
 			);
@@ -121,7 +119,6 @@
 				DB641C302C2AD4D70034C954 /* FacebookLogin */,
 				DB641C322C2AD4DE0034C954 /* FacebookShare */,
 				5006FF432CCFAABC00C2671D /* FacebookAEM */,
-				5006FF452CCFAABF00C2671D /* FacebookGamingServices */,
 			);
 			productName = MauiFacebook;
 			productReference = 643C24AF2B99104200C2A6AA /* MauiFacebook.framework */;
@@ -419,11 +416,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D0AF2A992BDC4E5B002AA03E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookAEM;
-		};
-		5006FF452CCFAABF00C2671D /* FacebookGamingServices */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D0AF2A992BDC4E5B002AA03E /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
-			productName = FacebookGamingServices;
 		};
 		D0AF2A9A2BDC4E5B002AA03E /* FacebookBasics */ = {
 			isa = XCSwiftPackageProductDependency;
