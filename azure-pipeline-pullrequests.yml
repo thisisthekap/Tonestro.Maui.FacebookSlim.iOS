@@ -2,7 +2,7 @@ pr:
   - main
 
 pool:
-  vmImage: 'macOS-13'
+  vmImage: 'macOS-14'
 
 steps:
 
