@@ -2,53 +2,43 @@ pr:
   - main
 
 pool:
-  vmImage: 'macOS-14'
+  vmImage: "macOS-15"
 
 steps:
+  - task: UseDotNet@2
+    inputs:
+      packageType: "sdk"
+      useGlobalJson: true
 
-- bash: |
-    sudo xcodes select
-  displayName: select solution xcode version
+  - bash: |
+      echo "##vso[build.updatebuildnumber]pullrequests-tonestro-maui-facebookslim-ios-$(Build.SourceBranchName)-$(Build.BuildId)"
+    displayName: Set Build Number
 
-- task: UseDotNet@2
-  inputs:
-    packageType: 'sdk'
-    useGlobalJson: true
+  - bash: |
+      sudo dotnet workload restore
+    displayName: Restore workloads
 
-- bash: |
-    echo "##vso[build.updatebuildnumber]pullrequests-tonestro-maui-facebookslim-ios-$(Build.SourceBranchName)-$(Build.BuildId)"
-  displayName: Set Build Number
+  - bash: |
+      cd Tonestro.Maui.FacebookSlim.iOS
+      dotnet build -c Release
+      dotnet pack -c Release
+    displayName: "Tonestro.Maui.FacebookSlim.iOS: Build Release Nuget"
 
-- bash: |
-    sudo dotnet workload restore
-  displayName: Restore workloads
+  - bash: |
+      cd local-nugets
+      cp ../Tonestro.Maui.FacebookSlim.iOS/nugetoutput/Tonestro.Maui.FacebookSlim.iOS.*.nupkg .
+      cd ..
+    displayName: copy nugets to local-nugets
 
-- bash: |
-    cd Mobile/Sepp.Mobile.iOS
-    sudo dotnet workload install ios --from-rollback-file rollback.json
-  displayName: Workaround for broken ios workload
+  - bash: |
+      cd Tonestro.Maui.FacebookSlim.iOS.UsageChecker
+      dotnet build
+    displayName: Build UsageChecker
 
-- bash: |
-    cd Tonestro.Maui.FacebookSlim.iOS
-    dotnet build -c Release
-    dotnet pack -c Release
-  displayName: "Tonestro.Maui.FacebookSlim.iOS: Build Release Nuget"
-
-- bash: |
-    cd local-nugets
-    cp ../Tonestro.Maui.FacebookSlim.iOS/nugetoutput/Tonestro.Maui.FacebookSlim.iOS.*.nupkg .
-    cd ..
-  displayName: copy nugets to local-nugets
-
-- bash: |
-    cd Tonestro.Maui.FacebookSlim.iOS.UsageChecker
-    dotnet build
-  displayName: Build UsageChecker
-
-- task: PublishBuildArtifacts@1
-  displayName: publish nugetoutput
-  inputs:
-    PathtoPublish: 'Tonestro.Maui.FacebookSlim.iOS/nugetoutput'
-    ArtifactName: 'nugetoutput'
-    publishLocation: 'Container'
-    StoreAsTar: true
+  - task: PublishBuildArtifacts@1
+    displayName: publish nugetoutput
+    inputs:
+      PathtoPublish: "Tonestro.Maui.FacebookSlim.iOS/nugetoutput"
+      ArtifactName: "nugetoutput"
+      publishLocation: "Container"
+      StoreAsTar: true
