@@ -5,6 +5,11 @@ pool:
   vmImage: "macOS-15"
 
 steps:
+
+  - bash: |
+      sudo xcodes select
+    displayName: select solution xcode version
+
   - task: UseDotNet@2
     inputs:
       packageType: "sdk"

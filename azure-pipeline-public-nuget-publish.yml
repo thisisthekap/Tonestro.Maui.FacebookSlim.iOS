@@ -12,6 +12,7 @@ variables:
   - group: nuget.org
 
 steps:
+
   - bash: |
       sudo xcodes select
     displayName: select solution xcode version
