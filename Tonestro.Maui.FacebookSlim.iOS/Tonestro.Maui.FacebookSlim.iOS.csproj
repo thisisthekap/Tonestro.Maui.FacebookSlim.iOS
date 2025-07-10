@@ -4,12 +4,13 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>true</ImplicitUsings>
         <IsBindingProject>true</IsBindingProject>
+        <MaciOSPrepareForBuildDependsOn>$(MaciOSPrepareForBuildDependsOn);DownloadDependencies</MaciOSPrepareForBuildDependsOn>
     </PropertyGroup>
 
     <PropertyGroup>
         <IsPackable>true</IsPackable>
         <PackageId>Tonestro.Maui.FacebookSlim.iOS</PackageId>
-        <Version>16.3.1.7</Version>
+        <Version>18.0.0.4</Version>
         <Description>Contains bindings for https://github.com/facebook/facebook-ios-sdk</Description>
         <Authors>Christian Kapplmüller, Albilaga Linggra Pradana</Authors>
         <Company>fun.music IT GmbH</Company>
@@ -19,6 +20,10 @@
         <EmbedAllSources>true</EmbedAllSources>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
     </PropertyGroup>
+
+    <Target Name="DownloadDependencies">
+        <Exec Command="../native/deps/download-dependencies.sh" />
+    </Target>
 
     <ItemGroup>
         <ObjcBindingApiDefinition Include="ApiDefinition.cs"/>

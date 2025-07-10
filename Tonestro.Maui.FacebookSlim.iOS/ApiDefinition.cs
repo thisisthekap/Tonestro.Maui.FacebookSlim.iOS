@@ -30,10 +30,6 @@ interface CoreKitManagerSlim
 	[Export ("enableLoggingBehaviorWithApploggingBehavior:")]
 	void EnableLoggingBehavior (LoggingBehaviorEnum apploggingBehavior);
 
-	// @property (nonatomic) BOOL isAdvertiserTrackingEnabled;
-	[Export ("isAdvertiserTrackingEnabled")]
-	bool IsAdvertiserTrackingEnabled { get; set; }
-
 	// @property (nonatomic) BOOL isAdvertiserIdCollectionEnabled;
 	[Export ("isAdvertiserIdCollectionEnabled")]
 	bool IsAdvertiserIdCollectionEnabled { get; set; }
