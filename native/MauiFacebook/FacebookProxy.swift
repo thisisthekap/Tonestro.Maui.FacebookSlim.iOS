@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-import FacebookLogin
+import FBSDKLoginKit
 
 @objc public enum LoginResultEnum : Int {
     case Error
@@ -135,12 +135,6 @@ public class CoreKitManagerSlim : NSObject {
         }
         
         CoreKitManagerSlim.settings.enableLoggingBehavior(loggingBehavior)
-    }
-    
-    @objc
-    public var isAdvertiserTrackingEnabled: Bool {
-        get { CoreKitManagerSlim.settings.isAdvertiserTrackingEnabled }
-        set(enabled) { CoreKitManagerSlim.settings.isAdvertiserTrackingEnabled = enabled }
     }
     
     @objc

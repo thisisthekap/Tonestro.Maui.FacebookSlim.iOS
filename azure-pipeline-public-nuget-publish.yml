@@ -12,6 +12,7 @@ variables:
   - group: nuget.org
 
 steps:
+
   - bash: |
       sudo xcodes select
     displayName: select solution xcode version
@@ -36,6 +37,10 @@ steps:
   - bash: |
       sudo dotnet workload restore
     displayName: Restore workloads
+
+  - bash: |
+      ./native/deps/download-dependencies.sh
+    displayName: Download Facebook Dependencies
 
   - bash: |
       cd Tonestro.Maui.FacebookSlim.iOS

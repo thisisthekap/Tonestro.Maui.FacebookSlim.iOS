@@ -5,6 +5,11 @@ pool:
   vmImage: "macOS-15"
 
 steps:
+
+  - bash: |
+      sudo xcodes select
+    displayName: select solution xcode version
+
   - task: UseDotNet@2
     inputs:
       packageType: "sdk"
@@ -17,6 +22,10 @@ steps:
   - bash: |
       sudo dotnet workload restore
     displayName: Restore workloads
+
+  - bash: |
+      ./native/deps/download-dependencies.sh
+    displayName: Download Facebook Dependencies
 
   - bash: |
       cd Tonestro.Maui.FacebookSlim.iOS
