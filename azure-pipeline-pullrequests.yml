@@ -24,6 +24,10 @@ steps:
     displayName: Restore workloads
 
   - bash: |
+      ./native/deps/download-dependencies.sh
+    displayName: Download Facebook Dependencies
+
+  - bash: |
       cd Tonestro.Maui.FacebookSlim.iOS
       dotnet build -c Release
       dotnet pack -c Release
