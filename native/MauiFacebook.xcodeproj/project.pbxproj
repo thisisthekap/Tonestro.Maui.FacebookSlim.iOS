@@ -9,38 +9,15 @@
 /* Begin PBXBuildFile section */
 		643C24B32B99104200C2A6AA /* MauiFacebook.h in Headers */ = {isa = PBXBuildFile; fileRef = 643C24B22B99104200C2A6AA /* MauiFacebook.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB47FF4A2E1FDDB3007BA0B3 /* FBSDKShareKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB47FF452E1FDDB3007BA0B3 /* FBSDKShareKit.xcframework */; };
-		DB47FF4B2E1FDDB3007BA0B3 /* FBSDKShareKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB47FF452E1FDDB3007BA0B3 /* FBSDKShareKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DB47FF4C2E1FDDB3007BA0B3 /* FBAEMKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB47FF462E1FDDB3007BA0B3 /* FBAEMKit.xcframework */; };
-		DB47FF4D2E1FDDB3007BA0B3 /* FBAEMKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB47FF462E1FDDB3007BA0B3 /* FBAEMKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DB47FF4E2E1FDDB3007BA0B3 /* FBSDKCoreKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB47FF472E1FDDB3007BA0B3 /* FBSDKCoreKit.xcframework */; };
-		DB47FF4F2E1FDDB3007BA0B3 /* FBSDKCoreKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB47FF472E1FDDB3007BA0B3 /* FBSDKCoreKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DB47FF502E1FDDB3007BA0B3 /* FBSDKLoginKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB47FF482E1FDDB3007BA0B3 /* FBSDKLoginKit.xcframework */; };
-		DB47FF512E1FDDB3007BA0B3 /* FBSDKLoginKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB47FF482E1FDDB3007BA0B3 /* FBSDKLoginKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DB47FF522E1FDDB3007BA0B3 /* FBSDKCoreKit_Basics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB47FF492E1FDDB3007BA0B3 /* FBSDKCoreKit_Basics.xcframework */; };
-		DB47FF532E1FDDB3007BA0B3 /* FBSDKCoreKit_Basics.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DB47FF492E1FDDB3007BA0B3 /* FBSDKCoreKit_Basics.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DB47FF552E1FDDBF007BA0B3 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB47FF542E1FDDBF007BA0B3 /* Accelerate.framework */; };
 		DB47FF572E1FDDC3007BA0B3 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB47FF562E1FDDC3007BA0B3 /* AdSupport.framework */; };
 		DB47FF592E1FDDCA007BA0B3 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB47FF582E1FDDCA007BA0B3 /* AppTrackingTransparency.framework */; };
 		DB641C2D2C2AD4AB0034C954 /* FacebookProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB641C2C2C2AD4AB0034C954 /* FacebookProxy.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		6425FFC92BBE067600F9DAB3 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				DB47FF4F2E1FDDB3007BA0B3 /* FBSDKCoreKit.xcframework in Embed Frameworks */,
-				DB47FF4D2E1FDDB3007BA0B3 /* FBAEMKit.xcframework in Embed Frameworks */,
-				DB47FF4B2E1FDDB3007BA0B3 /* FBSDKShareKit.xcframework in Embed Frameworks */,
-				DB47FF512E1FDDB3007BA0B3 /* FBSDKLoginKit.xcframework in Embed Frameworks */,
-				DB47FF532E1FDDB3007BA0B3 /* FBSDKCoreKit_Basics.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		643C24AF2B99104200C2A6AA /* MauiFacebook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MauiFacebook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,7 +115,6 @@
 				643C24AB2B99104200C2A6AA /* Sources */,
 				643C24AC2B99104200C2A6AA /* Frameworks */,
 				643C24AD2B99104200C2A6AA /* Resources */,
-				6425FFC92BBE067600F9DAB3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
