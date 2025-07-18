@@ -17,6 +17,7 @@
 		DB47FF572E1FDDC3007BA0B3 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB47FF562E1FDDC3007BA0B3 /* AdSupport.framework */; };
 		DB47FF592E1FDDCA007BA0B3 /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB47FF582E1FDDCA007BA0B3 /* AppTrackingTransparency.framework */; };
 		DB641C2D2C2AD4AB0034C954 /* FacebookProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB641C2C2C2AD4AB0034C954 /* FacebookProxy.swift */; };
+		DB705BD52E293086003027BA /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = DB705BD42E293086003027BA /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		DB47FF562E1FDDC3007BA0B3 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		DB47FF582E1FDDCA007BA0B3 /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		DB641C2C2C2AD4AB0034C954 /* FacebookProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookProxy.swift; sourceTree = "<group>"; };
+		DB705BD42E293086003027BA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			children = (
 				643C24B22B99104200C2A6AA /* MauiFacebook.h */,
 				DB641C2C2C2AD4AB0034C954 /* FacebookProxy.swift */,
+				DB705BD42E293086003027BA /* PrivacyInfo.xcprivacy */,
 			);
 			path = MauiFacebook;
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB705BD52E293086003027BA /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
