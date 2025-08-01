@@ -41,7 +41,8 @@ public enum LoggingBehaviorEnum : long
 	UIControlErrors = 5,
 	GraphAPIDebugWarning = 6,
 	NetworkRequests = 7,
-	DeveloperErrors = 8
+	DeveloperErrors = 8,
+	GraphAPIDebugInfo = 9
 }
 
 [Native]
