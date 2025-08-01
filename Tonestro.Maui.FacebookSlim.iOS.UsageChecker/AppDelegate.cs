@@ -42,6 +42,8 @@ public class AppDelegate : UIApplicationDelegate
     public override void OnActivated(UIApplication application)
     {
         CoreKitManagerSlim.Shared.ActivateApp();
+        CoreKitManagerSlim.Shared.LogEvent("test",
+            NSDictionary.FromObjectAndKey(new NSString("1234"), new NSString("asdf")));
     }
 
     // ReSharper disable once InconsistentNaming
