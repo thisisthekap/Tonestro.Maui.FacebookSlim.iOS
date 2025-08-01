@@ -23,10 +23,9 @@ import FBSDKLoginKit
     case   CacheErrors
     case   UIControlErrors
     case   GraphAPIDebugWarning
-    // we do not expose GraphAPIDebugInfo until https://github.com/facebook/facebook-ios-sdk/issues/2152 is resolved
-    //case   GraphAPIDebugInfo
     case   NetworkRequests
     case   DeveloperErrors
+    case   GraphAPIDebugInfo
 }
 
 @objc public enum AppEventNameEnum : Int {
@@ -125,13 +124,12 @@ public class CoreKitManagerSlim : NSObject {
             loggingBehavior = LoggingBehavior.uiControlErrors
         case   LoggingBehaviorEnum.GraphAPIDebugWarning:
             loggingBehavior = LoggingBehavior.graphAPIDebugWarning
-        // we do not expose GraphAPIDebugInfo until https://github.com/facebook/facebook-ios-sdk/issues/2152 is resolved
-        //case   LoggingBehaviorEnum.GraphAPIDebugInfo:
-        //    loggingBehavior = LoggingBehavior.graphAPIDebugInfo
         case     LoggingBehaviorEnum.NetworkRequests:
             loggingBehavior = LoggingBehavior.networkRequests
         case   LoggingBehaviorEnum.DeveloperErrors:
             loggingBehavior = LoggingBehavior.developerErrors
+        case   LoggingBehaviorEnum.GraphAPIDebugInfo:
+            loggingBehavior = LoggingBehavior.graphAPIDebugInfo
         }
         
         CoreKitManagerSlim.settings.enableLoggingBehavior(loggingBehavior)
