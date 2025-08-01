@@ -144,62 +144,21 @@ public class CoreKitManagerSlim : NSObject {
     @objc
     public func logEvent(appEventName : AppEventNameEnum, appparameters : NSDictionary) -> Void {
         
-        var appEventsName = AppEvents.Name("default")
-        
-        switch appEventName {
-        case AppEventNameEnum.AchievedLevel:
-            appEventsName = AppEvents.Name.achievedLevel
-        case AppEventNameEnum.AddedPaymentInfo:
-            appEventsName = AppEvents.Name.addedPaymentInfo
-        case AppEventNameEnum.AddedToCart:
-            appEventsName = AppEvents.Name.addedToCart
-        case AppEventNameEnum.AddedToWishlist:
-            appEventsName = AppEvents.Name.addedToWishlist
-        case AppEventNameEnum.CompletedRegistration:
-            appEventsName = AppEvents.Name.completedRegistration
-        case AppEventNameEnum.CompletedTutorial:
-            appEventsName = AppEvents.Name.completedTutorial
-        case AppEventNameEnum.InitiatedCheckout:
-            appEventsName = AppEvents.Name.initiatedCheckout
-        case AppEventNameEnum.Purchased:
-            appEventsName = AppEvents.Name.purchased
-        case AppEventNameEnum.Rated:
-            appEventsName = AppEvents.Name.rated
-        case AppEventNameEnum.Searched:
-            appEventsName = AppEvents.Name.searched
-        case AppEventNameEnum.SpentCredits:
-            appEventsName = AppEvents.Name.spentCredits
-        case AppEventNameEnum.UnlockedAchievement:
-            appEventsName = AppEvents.Name.unlockedAchievement
-        case AppEventNameEnum.ViewedContent:
-            appEventsName = AppEvents.Name.viewedContent
-        case AppEventNameEnum.Contact:
-            appEventsName = AppEvents.Name.contact
-        case AppEventNameEnum.CustomizeProduct:
-            appEventsName = AppEvents.Name.customizeProduct
-        case AppEventNameEnum.Donate:
-            appEventsName = AppEvents.Name.donate
-        case AppEventNameEnum.FindLocation:
-            appEventsName = AppEvents.Name.findLocation
-        case AppEventNameEnum.Schedule:
-            appEventsName = AppEvents.Name.schedule
-        case AppEventNameEnum.StartTrial:
-            appEventsName = AppEvents.Name.startTrial
-        case AppEventNameEnum.SubmitApplication:
-            appEventsName = AppEvents.Name.submitApplication
-        case AppEventNameEnum.Subscribe:
-            appEventsName = AppEvents.Name.subscribe
-        case AppEventNameEnum.AdImpression:
-            appEventsName = AppEvents.Name.adImpression
-        case AppEventNameEnum.AdClick:
-            appEventsName = AppEvents.Name.adClick
-        }
-        
+        let appEventsName = convertAppEventNameEnumToAppEventsName(appEventName: appEventName)
         let params = convertToAppEventsParameters(dict: appparameters)
         
         FBSDKCoreKit.AppEvents.shared.logEvent(appEventsName, parameters: params)
     }
     
+    @objc
+    public func logEvent(appEventName : AppEventNameEnum, valueToSum : Double, appparameters : NSDictionary) -> Void {
+        
+        let appEventsName = convertAppEventNameEnumToAppEventsName(appEventName: appEventName)
+        let params = convertToAppEventsParameters(dict: appparameters)
+        
+        FBSDKCoreKit.AppEvents.shared.logEvent(appEventsName, valueToSum: valueToSum, parameters: params)
+    }
+
     @objc
     public var userId : String? {
         get { FBSDKCoreKit.AppEvents.shared.userID }
@@ -236,9 +195,19 @@ public class CoreKitManagerSlim : NSObject {
         
         let appEventsName = AppEvents.Name(appEventName)
         let params = convertToAppEventsParameters(dict: appparameters)
+
         FBSDKCoreKit.AppEvents.shared.logEvent(appEventsName, parameters: params)
     }
     
+    @objc
+    public func logEventCustom(appEventName : String, valueToSum : Double, appparameters : NSDictionary) -> Void {
+        
+        let appEventsName = AppEvents.Name(appEventName)
+        let params = convertToAppEventsParameters(dict: appparameters)
+
+        FBSDKCoreKit.AppEvents.shared.logEvent(appEventsName, valueToSum: valueToSum, parameters: params)
+    }
+
     @objc
     public func initializeSdk() -> Void {
         FBSDKCoreKit.ApplicationDelegate.shared.initializeSDK()
@@ -267,5 +236,58 @@ public class CoreKitManagerSlim : NSObject {
         }
 
         return result
+    }
+
+    fileprivate func convertAppEventNameEnumToAppEventsName(appEventName: AppEventNameEnum) -> AppEvents.Name {
+        switch appEventName {
+        case AppEventNameEnum.AchievedLevel:
+            return AppEvents.Name.achievedLevel
+        case AppEventNameEnum.AddedPaymentInfo:
+            return AppEvents.Name.addedPaymentInfo
+        case AppEventNameEnum.AddedToCart:
+            return AppEvents.Name.addedToCart
+        case AppEventNameEnum.AddedToWishlist:
+            return AppEvents.Name.addedToWishlist
+        case AppEventNameEnum.CompletedRegistration:
+            return AppEvents.Name.completedRegistration
+        case AppEventNameEnum.CompletedTutorial:
+            return AppEvents.Name.completedTutorial
+        case AppEventNameEnum.InitiatedCheckout:
+            return AppEvents.Name.initiatedCheckout
+        case AppEventNameEnum.Purchased:
+            return AppEvents.Name.purchased
+        case AppEventNameEnum.Rated:
+            return AppEvents.Name.rated
+        case AppEventNameEnum.Searched:
+            return AppEvents.Name.searched
+        case AppEventNameEnum.SpentCredits:
+            return AppEvents.Name.spentCredits
+        case AppEventNameEnum.UnlockedAchievement:
+            return AppEvents.Name.unlockedAchievement
+        case AppEventNameEnum.ViewedContent:
+            return AppEvents.Name.viewedContent
+        case AppEventNameEnum.Contact:
+            return AppEvents.Name.contact
+        case AppEventNameEnum.CustomizeProduct:
+            return AppEvents.Name.customizeProduct
+        case AppEventNameEnum.Donate:
+            return AppEvents.Name.donate
+        case AppEventNameEnum.FindLocation:
+            return AppEvents.Name.findLocation
+        case AppEventNameEnum.Schedule:
+            return AppEvents.Name.schedule
+        case AppEventNameEnum.StartTrial:
+            return AppEvents.Name.startTrial
+        case AppEventNameEnum.SubmitApplication:
+            return AppEvents.Name.submitApplication
+        case AppEventNameEnum.Subscribe:
+            return AppEvents.Name.subscribe
+        case AppEventNameEnum.AdImpression:
+            return AppEvents.Name.adImpression
+        case AppEventNameEnum.AdClick:
+            return AppEvents.Name.adClick
+        default:
+            return AppEvents.Name("default")
+        }
     }
 }

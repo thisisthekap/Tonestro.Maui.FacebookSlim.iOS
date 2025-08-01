@@ -38,6 +38,10 @@ interface CoreKitManagerSlim
 	[Export ("logEventWithAppEventName:appparameters:")]
 	void LogEvent (AppEventNameEnum appEventName, NSDictionary appparameters);
 
+	// -(void)logEventWithAppEventName:(enum AppEventNameEnum)appEventName valueToSum:(double)valueToSum appparameters:(NSDictionary * _Nonnull)appparameters;
+	[Export ("logEventWithAppEventName:valueToSum:appparameters:")]
+	void LogEvent (AppEventNameEnum appEventName, double valueToSum, NSDictionary appparameters);
+
 	// @property (copy, nonatomic) NSString * _Nullable userId;
 	[NullAllowed, Export ("userId")]
 	string UserId { get; set; }
@@ -57,6 +61,10 @@ interface CoreKitManagerSlim
 	// -(void)logEventCustomWithAppEventName:(NSString * _Nonnull)appEventName appparameters:(NSDictionary * _Nonnull)appparameters;
 	[Export ("logEventCustomWithAppEventName:appparameters:")]
 	void LogEvent (string appEventName, NSDictionary appparameters);
+
+	// -(void)logEventCustomWithAppEventName:(NSString * _Nonnull)appEventName valueToSum:(double)valueToSum appparameters:(NSDictionary * _Nonnull)appparameters;
+	[Export ("logEventCustomWithAppEventName:valueToSum:appparameters:")]
+	void LogEvent (string appEventName, double valueToSum, NSDictionary appparameters);
 
 	// -(void)initializeSdk;
 	[Export ("initializeSdk")]
