@@ -195,7 +195,9 @@ public class CoreKitManagerSlim : NSObject {
             appEventsName = AppEvents.Name.adClick
         }
         
-        FBSDKCoreKit.AppEvents.shared.logEvent(appEventsName)
+        let params = convertToAppEventsParameters(dict: appparameters)
+        
+        FBSDKCoreKit.AppEvents.shared.logEvent(appEventsName, parameters: params)
     }
     
     @objc
@@ -233,7 +235,8 @@ public class CoreKitManagerSlim : NSObject {
     public func logEventCustom(appEventName : String, appparameters : NSDictionary) -> Void {
         
         let appEventsName = AppEvents.Name(appEventName)
-        FBSDKCoreKit.AppEvents.shared.logEvent(appEventsName)
+        let params = convertToAppEventsParameters(dict: appparameters)
+        FBSDKCoreKit.AppEvents.shared.logEvent(appEventsName, parameters: params)
     }
     
     @objc
@@ -249,5 +252,20 @@ public class CoreKitManagerSlim : NSObject {
     @objc
     public func openUrl(app : UIApplication, url : URL, options : [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         return FBSDKCoreKit.ApplicationDelegate.shared.application(app,open:url,options:options)
+    }
+
+    fileprivate func convertToAppEventsParameters(dict: NSDictionary) -> [AppEvents.ParameterName: Any] {
+        var result: [AppEvents.ParameterName: Any] = [:]
+
+        for (key, value) in dict {
+            guard let keyString = key as? String else {
+                continue // ignore everything but string keys
+            }
+
+            let parameterKey = AppEvents.ParameterName(keyString)
+            result[parameterKey] = value
+        }
+
+        return result
     }
 }
