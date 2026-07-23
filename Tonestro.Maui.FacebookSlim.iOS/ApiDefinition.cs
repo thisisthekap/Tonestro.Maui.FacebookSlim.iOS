@@ -30,6 +30,10 @@ interface CoreKitManagerSlim
 	[Export ("enableLoggingBehaviorWithApploggingBehavior:")]
 	void EnableLoggingBehavior (LoggingBehaviorEnum apploggingBehavior);
 
+	// @property (readonly, copy, nonatomic) NSString * _Nonnull sdkVersion;
+	[Export ("sdkVersion")]
+	string SdkVersion { get; }
+
 	// @property (nonatomic) BOOL isAdvertiserIdCollectionEnabled;
 	[Export ("isAdvertiserIdCollectionEnabled")]
 	bool IsAdvertiserIdCollectionEnabled { get; set; }
