@@ -4,7 +4,7 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 
 ## Project Overview
 
-This repository provides .NET MAUI bindings for the Facebook iOS SDK (v18.0.0), packaged as a NuGet package `Tonestro.Maui.FacebookSlim.iOS`. It wraps a subset of the Facebook iOS SDK functionality through a custom Swift wrapper (`MauiFacebook`) that exposes simplified APIs for CoreKit (analytics/events) and LoginKit (authentication).
+This repository provides .NET MAUI bindings for the Facebook iOS SDK (v18.1.0), packaged as a NuGet package `Tonestro.Maui.FacebookSlim.iOS`. It wraps a subset of the Facebook iOS SDK functionality through a custom Swift wrapper (`MauiFacebook`) that exposes simplified APIs for CoreKit (analytics/events) and LoginKit (authentication).
 
 ## Architecture
 
@@ -37,7 +37,7 @@ The project has a three-layer architecture:
 ```bash
 ./native/deps/download-dependencies.sh
 ```
-This downloads Facebook iOS SDK v18.0.0 static XCFrameworks from GitHub and extracts them to `native/deps/`.
+This downloads Facebook iOS SDK v18.1.0 static XCFrameworks from GitHub and extracts them to `native/deps/`.
 
 ### Build the Main Binding Project
 ```bash
@@ -107,7 +107,7 @@ The binding uses `[Export]` attributes to map C# method names to Objective-C sel
 
 ## Facebook SDK Dependencies
 
-The project depends on these Facebook iOS SDK frameworks (all v18.0.0):
+The project depends on these Facebook iOS SDK frameworks (all v18.1.0):
 - FBAEMKit.xcframework
 - FBSDKCoreKit.xcframework
 - FBSDKCoreKit_Basics.xcframework

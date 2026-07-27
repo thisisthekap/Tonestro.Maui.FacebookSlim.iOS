@@ -136,6 +136,11 @@ public class CoreKitManagerSlim : NSObject {
     }
     
     @objc
+    public var sdkVersion : String {
+        return Settings.shared.sdkVersion
+    }
+
+    @objc
     public var isAdvertiserIdCollectionEnabled : Bool {
         get { CoreKitManagerSlim.settings.isAdvertiserIDCollectionEnabled }
         set(enabled) { CoreKitManagerSlim.settings.isAdvertiserIDCollectionEnabled = enabled }

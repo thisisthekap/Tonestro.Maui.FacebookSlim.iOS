@@ -5,6 +5,17 @@ public class AppDelegate : UIApplicationDelegate
 {
     public override UIWindow? Window { get; set; }
 
+    private readonly UILabel _infoLabel = new()
+    {
+        BackgroundColor = UIColor.SystemBackground,
+        TextAlignment = UITextAlignment.Left,
+        Font = UIFont.GetMonospacedSystemFont(14, UIFontWeight.Regular),
+        Lines = 0,
+        AutoresizingMask = UIViewAutoresizing.All,
+    };
+
+    private int _loggedEvents;
+
     public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
     {
         CoreKitManagerSlim.Shared.EnableLoggingBehavior(LoggingBehaviorEnum.AccessTokens);
@@ -17,21 +28,20 @@ public class AppDelegate : UIApplicationDelegate
         CoreKitManagerSlim.Shared.EnableLoggingBehavior(LoggingBehaviorEnum.NetworkRequests);
         CoreKitManagerSlim.Shared.EnableLoggingBehavior(LoggingBehaviorEnum.DeveloperErrors);
         CoreKitManagerSlim.Shared.IsAdvertiserIdCollectionEnabled = true;
-        CoreKitManagerSlim.Shared.FinishedLaunching(application, ConvertToGenericNSDictionary(launchOptions));
+        var finishedLaunching =
+            CoreKitManagerSlim.Shared.FinishedLaunching(application, ConvertToGenericNSDictionary(launchOptions));
+        CoreKitManagerSlim.Shared.UserId = "usage-checker-42";
 
         // create a new window instance based on the screen size
         Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-        // create a UIViewController with a single UILabel
         var vc = new UIViewController();
-        vc.View!.AddSubview(new UILabel(Window!.Frame)
-        {
-            BackgroundColor = UIColor.SystemBackground,
-            TextAlignment = UITextAlignment.Center,
-            Text = "Hello, iOS!",
-            AutoresizingMask = UIViewAutoresizing.All,
-        });
+        _infoLabel.Frame = Window!.Frame.Inset(24, 60);
+        vc.View!.BackgroundColor = UIColor.SystemBackground;
+        vc.View!.AddSubview(_infoLabel);
         Window.RootViewController = vc;
+
+        RefreshInfo($"FinishedLaunching: {finishedLaunching}");
 
         // make the window visible
         Window.MakeKeyAndVisible();
@@ -44,6 +54,34 @@ public class AppDelegate : UIApplicationDelegate
         CoreKitManagerSlim.Shared.ActivateApp();
         CoreKitManagerSlim.Shared.LogEvent("test",
             NSDictionary.FromObjectAndKey(new NSString("1234"), new NSString("asdf")));
+        _loggedEvents++;
+        CoreKitManagerSlim.Shared.LogEvent(AppEventNameEnum.ViewedContent, 4.2,
+            NSDictionary.FromObjectAndKey(new NSString("1234"), new NSString("asdf")));
+        _loggedEvents++;
+
+        RefreshInfo("FinishedLaunching: True");
+    }
+
+    private void RefreshInfo(string launchState)
+    {
+        // every value below is read back through the binding from the native Facebook SDK
+        _infoLabel.Text =
+            $"""
+             Facebook SDK via binding
+
+             SdkVersion:
+               {CoreKitManagerSlim.Shared.SdkVersion}
+             {launchState}
+             AnonymousId:
+               {CoreKitManagerSlim.Shared.AnonymousId}
+             UserId (round-trip):
+               {CoreKitManagerSlim.Shared.UserId}
+             AdvertiserIdCollection:
+               {CoreKitManagerSlim.Shared.IsAdvertiserIdCollectionEnabled}
+             LoginManagerSlim.Shared:
+               {(LoginManagerSlim.Shared != null ? "resolved" : "null")}
+             Events logged: {_loggedEvents}
+             """;
     }
 
     // ReSharper disable once InconsistentNaming
