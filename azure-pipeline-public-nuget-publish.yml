@@ -49,7 +49,11 @@ steps:
     displayName: "Tonestro.Maui.FacebookSlim.iOS: Build Release Nuget"
 
   - bash: |
+      set -e
       dotnet nuget push Tonestro.Maui.FacebookSlim.iOS/nugetoutput/Tonestro.Maui.FacebookSlim.iOS.$(bindingsVersion).nupkg -k "$(nugetOrgApiKey)" -s https://api.nuget.org/v3/index.json
+      # pushing the nupkg already pushes a matching snupkg automatically; this explicit
+      # push guarantees the symbol package lands on nuget.org even if that changes
+      dotnet nuget push Tonestro.Maui.FacebookSlim.iOS/nugetoutput/Tonestro.Maui.FacebookSlim.iOS.$(bindingsVersion).snupkg -k "$(nugetOrgApiKey)" -s https://api.nuget.org/v3/index.json --skip-duplicate
     displayName: "Publish nuget packages to nuget.org"
 
   - task: GitHubRelease@1
@@ -61,6 +65,8 @@ steps:
       tagSource: "userSpecifiedTag"
       tag: "$(Build.SourceBranchName)"
       title: "Tonestro.Maui.FacebookSlim.iOS $(bindingsVersion)"
-      assets: "Tonestro.Maui.FacebookSlim/nugetoutput/Tonestro.Maui.FacebookSlim.iOS.*.nupkg"
+      assets: |
+        Tonestro.Maui.FacebookSlim.iOS/nugetoutput/Tonestro.Maui.FacebookSlim.iOS.*.nupkg
+        Tonestro.Maui.FacebookSlim.iOS/nugetoutput/Tonestro.Maui.FacebookSlim.iOS.*.snupkg
       changeLogCompareToRelease: "lastFullRelease"
       changeLogType: "issueBased"
