@@ -59,7 +59,7 @@ steps:
   - task: GitHubRelease@1
     inputs:
       gitHubConnection: "github.com_thisisthekap"
-      repositoryName: "thisisthekap/Tonestro.Maui.FacebookSlim.iOS"
+      repositoryName: "tonestro/Tonestro.Maui.FacebookSlim.iOS"
       action: "create"
       target: "$(Build.SourceVersion)"
       tagSource: "userSpecifiedTag"
